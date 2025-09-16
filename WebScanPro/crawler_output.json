@@ -1,101 +1,46 @@
-{
-    "pages": [
-        "https://quotes.toscrape.com",
-        "https://quotes.toscrape.com/login",
-        "https://quotes.toscrape.com/author/Albert-Einstein",
-        "https://quotes.toscrape.com/tag/change/page/1",
-        "https://quotes.toscrape.com/tag/deep-thoughts/page/1",
-        "https://quotes.toscrape.com/tag/thinking/page/1",
-        "https://quotes.toscrape.com/tag/world/page/1",
-        "https://quotes.toscrape.com/author/J-K-Rowling",
-        "https://quotes.toscrape.com/tag/abilities/page/1",
-        "https://quotes.toscrape.com/tag/choices/page/1",
-        "https://quotes.toscrape.com/tag/inspirational/page/1",
-        "https://quotes.toscrape.com/tag/life/page/1",
-        "https://quotes.toscrape.com/tag/live/page/1",
-        "https://quotes.toscrape.com/tag/miracle/page/1",
-        "https://quotes.toscrape.com/tag/miracles/page/1",
-        "https://quotes.toscrape.com/author/Jane-Austen",
-        "https://quotes.toscrape.com/tag/aliteracy/page/1",
-        "https://quotes.toscrape.com/tag/books/page/1",
-        "https://quotes.toscrape.com/tag/classic/page/1",
-        "https://quotes.toscrape.com/tag/humor/page/1",
-        "https://quotes.toscrape.com/author/Marilyn-Monroe",
-        "https://quotes.toscrape.com/tag/be-yourself/page/1",
-        "https://quotes.toscrape.com/tag/adulthood/page/1",
-        "https://quotes.toscrape.com/tag/success/page/1",
-        "https://quotes.toscrape.com/tag/value/page/1",
-        "https://quotes.toscrape.com/author/Andre-Gide",
-        "https://quotes.toscrape.com/tag/love/page/1",
-        "https://quotes.toscrape.com/author/Thomas-A-Edison",
-        "https://quotes.toscrape.com/tag/edison/page/1",
-        "https://quotes.toscrape.com/tag/failure/page/1"
-    ],
-    "forms": {
-        "https://quotes.toscrape.com": [],
-        "https://quotes.toscrape.com/login": [
+[
+    {
+        "url": "http://localhost:8080/login.php",
+        "title": "Login :: Damn Vulnerable Web Application (DVWA) v1.10 *Development*",
+        "meta_description": "",
+        "headings": [],
+        "forms": [
             {
-                "action": "/login",
-                "method": "post",
+                "action": "http://localhost:8080/login.php",
+                "method": "POST",
                 "inputs": [
                     {
-                        "tag": "input",
-                        "name": "csrf_token",
-                        "type": "hidden",
-                        "placeholder": null,
-                        "value": "dzkfCrIlqgsHbYXJMOnxZUQjipGySTDFVWuaRNBtKcwvhemPoLAE"
-                    },
-                    {
-                        "tag": "input",
                         "name": "username",
                         "type": "text",
-                        "placeholder": null,
-                        "value": null
+                        "placeholder": "",
+                        "value": "",
+                        "required": false
                     },
                     {
-                        "tag": "input",
                         "name": "password",
                         "type": "password",
-                        "placeholder": null,
-                        "value": null
+                        "placeholder": "",
+                        "value": "",
+                        "required": false
                     },
                     {
-                        "tag": "input",
-                        "name": null,
+                        "name": "Login",
                         "type": "submit",
-                        "placeholder": null,
-                        "value": "Login"
+                        "placeholder": "",
+                        "value": "Login",
+                        "required": false
+                    },
+                    {
+                        "name": "user_token",
+                        "type": "hidden",
+                        "placeholder": "",
+                        "value": "199f7d12bf8352c0c629c2da1d4ffeba",
+                        "required": false
                     }
                 ]
             }
         ],
-        "https://quotes.toscrape.com/author/Albert-Einstein": [],
-        "https://quotes.toscrape.com/tag/change/page/1": [],
-        "https://quotes.toscrape.com/tag/deep-thoughts/page/1": [],
-        "https://quotes.toscrape.com/tag/thinking/page/1": [],
-        "https://quotes.toscrape.com/tag/world/page/1": [],
-        "https://quotes.toscrape.com/author/J-K-Rowling": [],
-        "https://quotes.toscrape.com/tag/abilities/page/1": [],
-        "https://quotes.toscrape.com/tag/choices/page/1": [],
-        "https://quotes.toscrape.com/tag/inspirational/page/1": [],
-        "https://quotes.toscrape.com/tag/life/page/1": [],
-        "https://quotes.toscrape.com/tag/live/page/1": [],
-        "https://quotes.toscrape.com/tag/miracle/page/1": [],
-        "https://quotes.toscrape.com/tag/miracles/page/1": [],
-        "https://quotes.toscrape.com/author/Jane-Austen": [],
-        "https://quotes.toscrape.com/tag/aliteracy/page/1": [],
-        "https://quotes.toscrape.com/tag/books/page/1": [],
-        "https://quotes.toscrape.com/tag/classic/page/1": [],
-        "https://quotes.toscrape.com/tag/humor/page/1": [],
-        "https://quotes.toscrape.com/author/Marilyn-Monroe": [],
-        "https://quotes.toscrape.com/tag/be-yourself/page/1": [],
-        "https://quotes.toscrape.com/tag/adulthood/page/1": [],
-        "https://quotes.toscrape.com/tag/success/page/1": [],
-        "https://quotes.toscrape.com/tag/value/page/1": [],
-        "https://quotes.toscrape.com/author/Andre-Gide": [],
-        "https://quotes.toscrape.com/tag/love/page/1": [],
-        "https://quotes.toscrape.com/author/Thomas-A-Edison": [],
-        "https://quotes.toscrape.com/tag/edison/page/1": [],
-        "https://quotes.toscrape.com/tag/failure/page/1": []
+        "query_params": {},
+        "crawl_date": "2025-09-16 15:50:59"
     }
-}
+]
